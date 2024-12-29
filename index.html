@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Concepts in JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            font-size: 18px;
+        }
+        header {
+            background: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        section {
+            padding: 20px;
+            margin: 20px auto;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: 800px;
+        }
+        h2 {
+            color: #007bff;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 18px;
+        }
+        button {
+            background: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        #output {
+            background: #e9ecef;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            min-height: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>التعامل مع الملفات في جافا سكربت</h1>
+    </header>
+    <section>
+        <h2>قراءة الملفات Files Reading</h2>
+        <pre>
+const fs = require('fs');
+fs.readFile('./messages.txt', 'utf8', (error, data) => {
+    if (error) console.log(error);
+    else {
+        const mesg = data.split(',');
+        console.log(data);
+    }
+});
+console.log('Executed after read file');
+        </pre>
+        <button onclick="runFileReading()">تشغيل</button>
+        <div id="output1">نتيجة قراءة الملفات ستظهر هنا</div>
+    </section>
+
+    <section>
+        <h2>كتابة الملفات Files Writing</h2>
+        <pre>
+const fs = require('fs');
+const content = "Welcome to Hsoub Academy";
+fs.writeFile('./new.txt', content, 'utf8', (error) => {
+    if (error) console.log(error);
+    else console.log('File written');
+});
+        </pre>
+        <button onclick="runFileWriting()">تشغيل</button>
+        <div id="output2">نتيجة كتابة الملفات ستظهر هنا</div>
+    </section>
+
+    <section>
+        <h2>تعديل الملفات Files Editing</h2>
+        <pre>
+const fs = require('fs');
+fs.appendFile('./new.txt', '\nAdditional content', (error) => {
+    if (error) console.log(error);
+    else console.log('File updated');
+});
+fs.rename('./new.txt', './con.txt', (error) => {
+    if (error) console.log(error);
+    else console.log('File renamed');
+});
+fs.unlink('./con.txt', (error) => {
+    if (error) console.log(error);
+    else console.log('File deleted');
+});
+        </pre>
+        <button onclick="runFileEditing()">تشغيل</button>
+        <div id="output3">نتيجة تعديل الملفات ستظهر هنا</div>
+    </section>
+
+    <section>
+        <h2>الإدخال والإخراج I/O</h2>
+        <pre>
+const readline = require('readline');
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+rl.question('What is your name? ', (answer) => {
+    console.log(`Hello, ${answer}`);
+    rl.close();
+});
+        </pre>
+        <button onclick="runIO()">تشغيل</button>
+        <div id="output4">نتيجة الإدخال والإخراج ستظهر هنا</div>
+    </section>
+
+    <script>
+        function runFileReading() {
+            const output = document.getElementById('output1');
+            output.innerText = 'Simulation: Reading file messages.txt...';
+        }
+
+        function runFileWriting() {
+            const output = document.getElementById('output2');
+            output.innerText = 'Simulation: Writing to file new.txt...';
+        }
+
+        function runFileEditing() {
+            const output = document.getElementById('output3');
+            output.innerText = 'Simulation: Editing, renaming, and deleting files...';
+        }
+
+        function runIO() {
+            const output = document.getElementById('output4');
+            output.innerText = 'Simulation: Asking for user input...';
+        }
+    </script>
+</body>
+</html>
